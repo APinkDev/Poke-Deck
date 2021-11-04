@@ -1,7 +1,7 @@
 //                       _oo0oo_
 //                      o8888888o
 //                      88" . "88
-//                      (| -_- |)
+//                      (| owo |)
 //                      0\  =  /0
 //                    ___/`---'\___
 //                  .' \\|     |// '.
@@ -18,10 +18,22 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
+const express=require('express');
+const morgan=require('morgan');
 const { conn } = require('./src/db.js');
+const router = require('./src/routes/index.js');
+
+server.use(express.json())
+server.use(morgan('dev'))
+
+server.use('/',router);
+
+server.get('*',(req,res)=>{
+  res.status(400).json({error:'page not found'})
+})
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
