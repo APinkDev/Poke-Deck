@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { GetGenres } from "../Store/actions.js";
 import { Post } from "../Store/actions.js";
 // import "./Create.css";
 export default function Create() {
   const dispatch = useDispatch();
-
-  const [error, setError] = useState({});
 
   const validate = (inputs) =>{
     let error = {};

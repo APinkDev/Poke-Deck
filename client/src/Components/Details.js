@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Detailed } from "../Store/actions";
 import { useDispatch, useSelector } from "react-redux";
-// import "./Details.css";
-// import scroll from "../rsc/Scroll.png";
-// import SrollingMouse from "../rsc/ScrollDown.gif";
 
 const Details = (props) => {
   let id = props.match.params.id;
@@ -20,16 +16,7 @@ const Details = (props) => {
     dispatch(Detailed(id));
   }, [id, dispatch]);
 
-let platArray = []
-  
-// if (typeof(detailed.platforms) === "string" && detailed.platforms.includes(",")){
-//   platArray=detailed.platforms.split(",");
-// }
-// else if(typeof(detailed.platforms) === "string" && !detailed.platforms.includes(",")){
-//   platArray=[detailed.platforms] //platArray=["Action"]
-// }
-console.log(detailed.TypesInDB)
-let TypeArray = detailed.TypesInDB && detailed.TypesInDB.length? detailed.TypesInDB.map((e)=>e.name):detailed.types
+
 
   return (
     <div className="Background__Details">
@@ -38,7 +25,7 @@ let TypeArray = detailed.TypesInDB && detailed.TypesInDB.length? detailed.TypesI
           <button className="HomeButtom">←</button>
         </Link>
       </div>
-      <p>Hola</p>
+      <p>Howdy, Loading Pokemons</p>
       <div className="Released__Details">{detailed.id}</div>
       <div className="Name__Details">{detailed.name}</div>
 

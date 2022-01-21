@@ -165,6 +165,7 @@ const reducer = (state = initialState, action) => {
             Number.isNaN(Number(a.id))),
           }; 
         }
+        break;
       }
 
 
