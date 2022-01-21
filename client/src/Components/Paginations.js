@@ -1,15 +1,16 @@
 import React from "react";
-import "./Paginations.css"
+// import "./Paginations.css"
 
-const Paginations = ({ pokesPerPage, totalPokes, paginate }) => {
+const Paginations = ({ pokesPerPage, totalpokes, paginate }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalPokes / pokesPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalpokes / pokesPerPage); i++) {
     pageNumbers.push(i);
   }
 
   return (
     <nav>
+      <p>Hola</p>
       <ul className="Pagination__ul">
         {pageNumbers.map(number => (
           <li  key={number} className="Pagination__Li">

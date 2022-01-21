@@ -1,21 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Pokemon.css";
-
 export default function Pokemon({
   id,
   name,
-  front_default,
+  //front_default,
+  img,
   types,
-  
 }) {
   return (
     <div>
-      <Link to={`/home/details/${id}`}>
+      {/* <Link to={`/details/${id}`}> */}
+      <Link to={`details/${id}`}>
         <div
           className="Pokemon__All"
-          style={{ backgroundImage: `url('${front_default}')` }}
+          style={{ backgroundImage: `url('${img}')` }}
         >
+          {/* <p>lol{img}</p> */}
           <div className="Pokemon__Container__Imagen">
             <div className="Pokemon__Name">{name}</div>
             <div className="Pokemon__types">
@@ -26,7 +27,7 @@ export default function Pokemon({
                   </li>
                 ))
               ) : (
-                <span>No genres yet</span>
+                <span>No types yet</span>
               )}
             </div>
           </div>

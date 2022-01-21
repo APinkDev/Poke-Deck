@@ -63,31 +63,113 @@ module.exports = {
     return cont;
   },
 
+
   pokeRequest: async () => {
-    const apiUrl = await axios.get(
-      "https://pokeapi.co/api/v2/pokemon?limit=40"
-    );
-    const results = apiUrl.data.results;
+    const apiUrl = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=20");
+    const results = apiUrl.data.results
 
-    const pokemonInfo = [];
+    const pokemonInfo = []
 
-    for (let i = 0; i < results.length; i++) {
+    // const resultsPokes = apiUrl.data.results.map(async el => {
+    //     const pokes = await axios.get(el.url);
+    //     const pokeInfo = pokes.data
+
+    //     return {
+    //         id: pokeInfo.id,
+    //         name: el.name,
+    //         type: pokeInfo.types.map( t => t.type.name),
+    //         img: pokeInfo.sprites.versions["generation-v"]["black-white"].animated
+    //            .front_default,
+    //         strengh: pokeInfo.stats[1].base_stat,
+    //     }
+    // })
+    
+    for(let i = 0 ; i < results.length ; i++){
       const pokes = await axios.get(results[i].url);
       const pokeInfo = pokes.data;
 
       pokemonInfo.push({
-        // id: pokeInfo.id,
+        id: pokeInfo.id,
         name: pokeInfo.name,
         types: pokeInfo.types.map((t) => t.type.name),
-        img: pokeInfo.sprites.other["official-artwork"].front_default,
-        // attack: pokeInfo.stats[1].base_stat,
-        // weight: pokeInfo.weight,
-        // height: pokeInfo.height
+        img: pokeInfo.sprites.other['official-artwork'].front_default,
+        attack: pokeInfo.stats[1].base_stat,
+        weight: pokeInfo.weight,
+        height: pokeInfo.height
       });
     }
-
+    
     return pokemonInfo;
-  },
+},
+
+
+
+
+  // pokeRequest: async () => {
+  //   const apiUrl = await axios.get(
+  //     "https://pokeapi.co/api/v2/pokemon?limit=40"
+  //   );
+  //   const results = apiUrl.data.results;
+
+  //   const pokemonInfo = [];
+
+  //   for (let i = 0; i < results.length; i++) {
+  //     const pokes = await axios.get(results[i].url);
+  //     const pokeInfo = pokes.data;
+
+  //     pokemonInfo.push({
+  //       // id: pokeInfo.id,
+  //       name: pokeInfo.name,
+  //       types: pokeInfo.types.map((t) => t.type.name),
+  //       img: pokeInfo.sprites.other["official-artwork"].front_default,
+  //       // attack: pokeInfo.stats[1].base_stat,
+  //       // weight: pokeInfo.weight,
+  //       // height: pokeInfo.height
+  //     });
+  //   }
+
+  //   return pokemonInfo;
+  // },
+
+
+
+
+
+
+  
+//     async pokeRequest2(req, res) {
+//   try {
+//     //pido a la url los pokemons
+//     let datos = [];
+//     const pokemons = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=40`)
+//       .then((res) => res.data)
+//       .then((res) => res);
+//     //mapeo y hago peticion a la url que me dio la anterior peticion para obtener mas datos aparte del nombre
+//     const promise = pokemons.results.map(async (pokemon) => {
+//       return await axios.get(`${pokemon.url}`).then((res) => res.data);
+//     });
+
+//     const resultado = await Promise.all(promise);
+//     resultado.map((pokemon) =>
+//       datos.push({
+//         id: pokemon.id,
+//         name: pokemon.name,
+//         life: pokemon.stats[0].base_stat,
+//         force: pokemon.stats[1].base_stat,
+//         defending: pokemon.stats[2].base_stat,
+//         speed: pokemon.stats[5].base_stat,
+//         types: pokemon.types.map((info) => {
+//           return { name: info.type.name };
+//         }),
+//         img: pokemon.sprites.versions["generation-v"]["black-white"].animated
+//           .front_default,
+//       })
+//     );
+//     return datos;
+//   } catch(e){
+//     console.log("error" + e);
+//   }
+// },
 
   pedirTypes: async () => {
     const typesdb = await axios.get(`https://pokeapi.co/api/v2/type`);
@@ -140,7 +222,7 @@ module.exports = {
       console.log("Error" + e);
     }
   },
-};
+}
 
 // pokeRequest: async () => {
 //   let contNum = [];
@@ -228,3 +310,41 @@ module.exports = {
 //   );
 //   return cont;
 // },
+
+const getApiInfo = async () => {
+  const apiUrl = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=10");
+  const results = apiUrl.data.results
+
+  const pokemonInfo = []
+
+  // const resultsPokes = apiUrl.data.results.map(async el => {
+  //     const pokes = await axios.get(el.url);
+  //     const pokeInfo = pokes.data
+
+  //     return {
+  //         id: pokeInfo.id,
+  //         name: el.name,
+  //         type: pokeInfo.types.map( t => t.type.name),
+  //         img: pokeInfo.sprites.versions["generation-v"]["black-white"].animated
+  //            .front_default,
+  //         strengh: pokeInfo.stats[1].base_stat,
+  //     }
+  // })
+  
+  for(let i = 0 ; i < results.length ; i++){
+    const pokes = await axios.get(results[i].url);
+    const pokeInfo = pokes.data;
+
+    pokemonInfo.push({
+      id: pokeInfo.id,
+      name: pokeInfo.name,
+      types: pokeInfo.types.map((t) => t.type.name),
+      img: pokeInfo.sprites.other['official-artwork'].front_default,
+      attack: pokeInfo.stats[1].base_stat,
+      weight: pokeInfo.weight,
+      height: pokeInfo.height
+    });
+  }
+  
+  return pokemonInfo;
+}
