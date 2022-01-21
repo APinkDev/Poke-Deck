@@ -39,7 +39,7 @@ const reducer = (state = initialState, action) => {
         Details: action.payload.detis,
       };
     }
-
+ 
     //-----------------------------------------------------------------------------------------------
 
     case "FILTRATED": {
@@ -64,7 +64,6 @@ const reducer = (state = initialState, action) => {
     }
 
     case "FILTRATEDAZ":
-      {
         if (action.payload === "") {
           return {
             ...state,
@@ -141,7 +140,6 @@ const reducer = (state = initialState, action) => {
             ),
           };
         }
-      }
       break;
 
       case "FILTRATEDTYPE": {
